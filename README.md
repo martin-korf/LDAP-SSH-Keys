@@ -29,7 +29,7 @@ This script is designed to query a remote LDAP server for a user's group members
 3. **SSH Key Schema**: To store SSH keys in LDAP, you must import the `ssh-ldap-key.ldif` file, which defines `ldapPublicKey` and `sshPublicKey` attributes.
 4. In the LDAP you need few groups to get it work - the main is  "ou=sshgroups,dc=example,dc=com". Then you need two subfolders "ou=servergroups,ou=sshgroups,dc=example,dc=com" and "ou=accessgroups,ou=sshgroups,dc=example,dc=com" (jubox is hostname of example server)
 
- ![LDAP Groups](/screenshots/LDAP.png?raw=true)
+    ![LDAP Groups](/screenshots/LDAP.png?raw=true)
 
 
 ## Script Setup
@@ -116,7 +116,7 @@ You can manually run the script by passing a username as an argument to list key
 ## Example
 If you need access to jubox sever, you have to be member of cn=jubox,ou=webservers,ou=servergroups,ou=sshgroups,dc=example,dc=com or "cn=webservers,ou=accessgroups,ou=sshgroups,dc=example,dc=com"
 
- ![LDAP Groups](/screenshots/LDAP.png?raw=true)
+    ![LDAP Groups](/screenshots/LDAP.png?raw=true)
 
 ## Troubleshooting
 ### Common Issues
