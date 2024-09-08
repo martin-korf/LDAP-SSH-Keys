@@ -2,7 +2,7 @@
 
 This script is designed to query a remote LDAP server for a user's group memberships and retrieve the SSH public key if it is stored in LDAP. It dynamically searches for the correct organizational unit (OU) and user groups based on the server's hostname. The script can be integrated with SSH’s `AuthorizedKeysCommand` to automatically retrieve SSH keys from LDAP during user login.
 
-It allow permissions fine tuning- you can allow access to one server or group of servers
+<u><strong>It allow permissions fine tuning- you can allow access to one server or group of servers</strong></u>
 
 ## Features
 
@@ -28,7 +28,8 @@ It allow permissions fine tuning- you can allow access to one server or group of
 
 3. **SSH Key Schema**: To store SSH keys in LDAP, you must import the `ssh-ldap-key.ldif` file, which defines `ldapPublicKey` and `sshPublicKey` attributes.
 4. In the LDAP you need few groups to get it work - the main is  "ou=sshgroups,dc=example,dc=com". Then you need two subfolders "ou=servergroups,ou=sshgroups,dc=example,dc=com" and "ou=accessgroups,ou=sshgroups,dc=example,dc=com" (jubox is hostname of example server)
- ![LDAP Groups](/screenshot/LDAP.png?raw=true)
+
+ ![LDAP Groups](/screenshots/LDAP.png?raw=true)
 
 
 ## Script Setup
@@ -37,7 +38,7 @@ It allow permissions fine tuning- you can allow access to one server or group of
 
 Before using the script, you need to import the `ssh-ldap-key.ldif` file to add support for SSH keys in your LDAP directory.
 
-1. Create a file called `ssh-ldap-key.ldif` with the following content:
+1. Create a file called `ssh-ldap-key.ldif` with the following content (or download it from repo):
 
     ```
     dn: cn=lpk-openssh,cn=schema,cn=config
@@ -113,12 +114,13 @@ You can manually run the script by passing a username as an argument to list key
 - Fallback Mechanism: If the user is not found in the initial group, the script dynamically searches for other related groups to locate the user.
 
 ## Example
-If you need access to jubox severr, you have to be member of cn=jubox,ou=webservers,ou=servergroups,ou=sshgroups,dc=example,dc=com or "cn=webservers,ou=accessgroups,ou=sshgroups,dc=example,dc=com"
- ![LDAP Groups](/screenshot/LDAP.png?raw=true)
+If you need access to jubox sever, you have to be member of cn=jubox,ou=webservers,ou=servergroups,ou=sshgroups,dc=example,dc=com or "cn=webservers,ou=accessgroups,ou=sshgroups,dc=example,dc=com"
+
+ ![LDAP Groups](/screenshots/LDAP.png?raw=true)
 
 ## Troubleshooting
 ### Common Issues
 + Authentication Errors: Ensure the correct LDAP admin credentials (DN and password) are configured in the script.
 + Connection Issues: Verify that the LDAP server address and port (default: 389) are correct and that the server is reachable.
-+User Not Found: Ensure the correct username is being passed and that the user exists in the correct LDAP groups.
-+SSH Key Retrieval: Ensure that the sshPublicKey attribute is properly set for the user in LDAP. The SSH key must be in the correct format (e.g., ssh-rsa <key>).
++ User Not Found: Ensure the correct username is being passed and that the user exists in the correct LDAP groups.
++ SSH Key Retrieval: Ensure that the sshPublicKey attribute is properly set for the user in LDAP. The SSH key must be in the correct format (e.g., ssh-rsa <key>).
